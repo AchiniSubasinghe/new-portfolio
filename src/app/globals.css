@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+@theme {
+  --color-background: #1a1a1a;
+  --color-surface: #2a2a2a;
+  --color-foreground: #ffffff;
+  --color-border: #ffffff;
+  --color-muted: #a0a0a0;
+  --font-family-handwritten: var(--font-caveat), cursive;
+  --radius-default: 0.75rem;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-family-handwritten);
+  }
+}
