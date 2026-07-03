@@ -7,18 +7,11 @@ export interface WorkEntry {
 
 export const workEntries: WorkEntry[] = [
   {
-    title: "Software Engineering Intern",
-    company: "TechCorp Solutions",
-    period: "Jan 2025 – Jun 2025",
+    title: "Contact support agent ",
+    company: "IWI Coperation Pvt Ltd",
+    period: "part-time | Jan 2026 – Present",
     description:
-      "Developed and maintained full-stack web applications using React, Node.js, and PostgreSQL. Collaborated with cross-functional teams in an agile environment, participated in code reviews, and contributed to CI/CD pipeline improvements.",
-  },
-  {
-    title: "Junior Full-Stack Developer",
-    company: "StartUp Labs",
-    period: "Jul 2024 – Dec 2024",
-    description:
-      "Built customer-facing features for a SaaS platform using Next.js and TypeScript. Implemented RESTful APIs, integrated third-party services, and wrote unit and integration tests.",
+      "Provided technical support to customers via phone and email. Resolved issues related to software functionality and database queries. Collaborated with development team to identify and report bugs.",
   },
 ];
 

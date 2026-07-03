@@ -74,11 +74,10 @@ export default function AboutPage() {
         </div>
         <div className="w-full md:w-2/5 flex justify-center">
           <Image
-            src="/images/"
+            src="/images/vice.jpeg"
             alt="Achini Subasinghe"
             width={495}
-            height={504}
-           
+            height={504}          
           />
         </div>
       </div>

@@ -22,7 +22,7 @@ export default function Home() {
         <h1 className="text-4xl md:text-5xl">{personal.name}</h1>
         <p className="text-2xl text-gray-400">{personal.role}</p>
         <div>
-          <Button as="a" href={personal.cvPath} download="achini-cv.pdf">
+          <Button as="a" href={personal.cvPath} download="Achini-CV.pdf">
             Download CV
           </Button>
         </div>

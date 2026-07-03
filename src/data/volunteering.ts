@@ -10,7 +10,7 @@ export interface VolunteeringExperience {
 export const volunteeringExperiences: VolunteeringExperience[] = [
   {
     title: "Nexora 1.0 ",
-    organization: "sscociation of computer science and data science (NSBM)",
+    organization: "Asscociation of computer science and data science (NSBM)",
     period: "2024",
     description:
       "Helped organize technical workshops, coding competitions, and knowledge-sharing sessions for the university community. Coordinated with speakers, managed event logistics, and promoted events across campus.",
