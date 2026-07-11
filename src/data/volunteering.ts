@@ -32,7 +32,7 @@ export const volunteeringExperiences: VolunteeringExperience[] = [
     period: "2026",
     description:
       "Participated in coastal and urban cleanup drives. Helped raise awareness about waste management and environmental conservation through social media campaigns and community outreach.",
-    image1: "/images/vice.jpeg",
-    image2: "/images/vice.jpeg",
+    image1: "/images/plmyhack.jpeg",
+    image2: "/images/octo.jpeg",
   },
 ];
