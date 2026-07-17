@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { projects } from "@/data/projects";
 import { Section } from "@/components/Section";
 
@@ -10,22 +11,28 @@ export const metadata: Metadata = {
 interface ProjectCardProps {
   title: string;
   description: string;
+  image: string;
   repoUrl: string;
+  liveDemoUrl: string;
   techStack: string[];
 }
 
-function ProjectCard({ title, description, repoUrl, techStack }: ProjectCardProps) {
+function ProjectCard({ title, description, image, repoUrl, liveDemoUrl, techStack }: ProjectCardProps) {
   return (
     <Section>
       <div className="flex flex-col md:flex-row gap-6">
-        {/* Left — placeholder image */}
         <div className="w-full md:w-2/5">
-          <div className="border-2 border-white rounded-2xl bg-surface h-48 md:h-full flex items-center justify-center">
-            <span className="text-4xl text-gray-400">{title.charAt(0)}</span>
+          <div className="overflow-hidden rounded-2xl border-2 border-white bg-surface aspect-[4/3] md:h-full">
+            <Image
+              src={image}
+              alt={`${title} thumbnail`}
+              width={800}
+              height={600}
+              className="h-full w-full object-cover"
+            />
           </div>
         </div>
 
-        {/* Right — project details */}
         <div className="w-full md:w-3/5 flex flex-col gap-4">
           <h2 className="text-2xl">{title}</h2>
           <p className="text-lg text-gray-300 leading-relaxed">{description}</p>
@@ -39,14 +46,24 @@ function ProjectCard({ title, description, repoUrl, techStack }: ProjectCardProp
               </span>
             ))}
           </div>
-          <a
-            href={repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block border-2 border-white rounded-full px-6 py-2 text-lg w-fit"
-          >
-            View on GitHub
-          </a>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block border-2 border-white rounded-full px-6 py-2 text-lg w-fit"
+            >
+              View on GitHub
+            </a>
+            <a
+              href={liveDemoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block border-2 border-white rounded-full px-6 py-2 text-lg w-fit"
+            >
+              View Live Demo
+            </a>
+          </div>
         </div>
       </div>
     </Section>
