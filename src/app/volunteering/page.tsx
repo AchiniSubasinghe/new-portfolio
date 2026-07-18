@@ -11,37 +11,51 @@ export const metadata: Metadata = {
 export default function VolunteeringPage() {
   return (
     <div>
-      <h1 className="text-3xl md:text-4xl mb-10">Volunteering</h1>
-      <div className="flex flex-col gap-10">
-        {volunteeringExperiences.map((exp) => (
+      <header className="mb-10 space-y-3">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+          Community
+        </p>
+        <h1 className="text-3xl font-medium tracking-tight md:text-4xl">
+          Volunteering
+        </h1>
+      </header>
+      <div className="flex flex-col gap-8">
+        {volunteeringExperiences.map((exp, index) => (
           <Section key={exp.title}>
-            <div className="flex flex-col md:flex-row gap-8">
-              {/* Left — details */}
-              <div className="w-full md:w-1/2 flex flex-col gap-3">
-                <h2 className="text-2xl">{exp.title}</h2>
-                <p className="text-xl text-gray-400">{exp.organization}</p>
-                <p className="text-base text-gray-400">{exp.period}</p>
-                <p className="text-lg leading-relaxed mt-2">{exp.description}</p>
+            <div
+              className={[
+                "flex flex-col gap-8",
+                index % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row",
+              ].join(" ")}
+            >
+              <div className="flex w-full flex-col gap-3 md:w-1/2">
+                <h2 className="text-2xl font-medium tracking-tight">{exp.title.trim()}</h2>
+                <p className="text-base font-medium text-accent-muted">
+                  {exp.organization}
+                </p>
+                <p className="text-sm tabular-nums text-muted">{exp.period}</p>
+                <p className="mt-2 max-w-prose text-base leading-relaxed text-foreground/90">
+                  {exp.description}
+                </p>
               </div>
 
-              {/* Right — two images */}
-              <div className="w-full md:w-1/2 grid grid-cols-2 gap-4">
-                <div className="aspect-square w-full">
+              <div className="grid w-full grid-cols-2 gap-3 md:w-1/2">
+                <div className="aspect-square overflow-hidden rounded-lg border border-border">
                   <Image
                     src={exp.image1}
-                    alt={`${exp.title} image 1`}
-                    width={250}
-                    height={250}
-                    className="rounded-2xl border-2 border-white object-cover w-full h-full"
+                    alt={`${exp.title.trim()} — photo 1`}
+                    width={400}
+                    height={400}
+                    className="h-full w-full object-cover"
                   />
                 </div>
-                <div className="aspect-square w-full">
+                <div className="aspect-square overflow-hidden rounded-lg border border-border">
                   <Image
                     src={exp.image2}
-                    alt={`${exp.title} image 2`}
-                    width={250}
-                    height={250}
-                    className="rounded-2xl border-2 border-white object-cover w-full h-full"
+                    alt={`${exp.title.trim()} — photo 2`}
+                    width={400}
+                    height={400}
+                    className="h-full w-full object-cover"
                   />
                 </div>
               </div>

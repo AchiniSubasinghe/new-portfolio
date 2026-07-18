@@ -5,6 +5,9 @@ import { Button } from "@/components/Button";
 
 type FormStatus = "idle" | "submitting" | "sent" | "error";
 
+const fieldClass =
+  "w-full rounded-lg border border-border-strong bg-background/60 px-4 py-2.5 text-base text-foreground placeholder:text-muted/60 transition-[border-color,box-shadow] duration-200 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/25";
+
 export function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,10 +18,8 @@ export function ContactForm() {
     e.preventDefault();
     setStatus("submitting");
 
-    // Simulate submission
     setTimeout(() => {
       try {
-        // Simulate random failure (~10% chance)
         if (Math.random() < 0.1) {
           throw new Error("Simulated send failure");
         }
@@ -34,10 +35,10 @@ export function ContactForm() {
 
   if (status === "error") {
     return (
-      <div className="border-2 border-white rounded-2xl p-6 md:p-8 text-center">
-        <p className="text-2xl">Something went wrong</p>
-        <p className="text-lg text-gray-400 mt-2">
-          Please try again later.
+      <div className="rounded-xl border border-border bg-surface/80 p-6 text-center shadow-[var(--shadow-soft)] md:p-8">
+        <p className="text-xl font-medium tracking-tight">Message could not be sent</p>
+        <p className="mt-2 text-base text-muted">
+          Connection failed. Please try again, or email me directly.
         </p>
         <div className="mt-6">
           <Button onClick={() => setStatus("idle")}>Try again</Button>
@@ -48,63 +49,85 @@ export function ContactForm() {
 
   if (status === "sent") {
     return (
-      <div className="border-2 border-white rounded-2xl p-6 md:p-8 text-center">
-        <p className="text-2xl">Message sent!</p>
-        <p className="text-lg text-gray-400 mt-2">Thank you for reaching out. I&apos;ll get back to you soon.</p>
+      <div className="rounded-xl border border-border bg-surface/80 p-6 text-center shadow-[var(--shadow-soft)] md:p-8">
+        <p className="text-xl font-medium tracking-tight">Message sent</p>
+        <p className="mt-2 text-base text-muted">
+          Thank you for reaching out. I&apos;ll get back to you soon.
+        </p>
         <div className="mt-6">
-          <Button onClick={() => setStatus("idle")}>Send another message</Button>
+          <Button onClick={() => setStatus("idle")} variant="ghost">
+            Send another message
+          </Button>
         </div>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="border-2 border-white rounded-2xl p-6 md:p-8">
-      <h2 className="text-2xl md:text-3xl mb-6">Send me a message</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="rounded-xl border border-border bg-surface/80 p-6 shadow-[var(--shadow-soft)] md:p-8"
+      noValidate
+    >
+      <h2 className="mb-6 text-2xl font-medium tracking-tight md:text-3xl">
+        Send me a message
+      </h2>
 
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-2">
-          <label htmlFor="name" className="text-lg">Name</label>
+          <label htmlFor="name" className="text-sm font-medium text-muted">
+            Name
+          </label>
           <input
             id="name"
             type="text"
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="border-2 border-white rounded-full px-4 py-2 bg-transparent text-lg text-white placeholder-gray-500 focus:outline-none"
+            className={fieldClass}
             placeholder="Your name"
+            autoComplete="name"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="text-lg">Email</label>
+          <label htmlFor="email" className="text-sm font-medium text-muted">
+            Email
+          </label>
           <input
             id="email"
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="border-2 border-white rounded-full px-4 py-2 bg-transparent text-lg text-white placeholder-gray-500 focus:outline-none"
-            placeholder="your@email.com"
+            className={fieldClass}
+            placeholder="you@example.com"
+            autoComplete="email"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="message" className="text-lg">Message</label>
+          <label htmlFor="message" className="text-sm font-medium text-muted">
+            Message
+          </label>
           <textarea
             id="message"
             required
             rows={5}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="border-2 border-white rounded-2xl px-4 py-2 bg-transparent text-lg text-white placeholder-gray-500 focus:outline-none resize-none"
-            placeholder="Your message..."
+            className={`${fieldClass} resize-none rounded-xl`}
+            placeholder="What would you like to talk about?"
           />
         </div>
 
         <div>
-          <Button type="submit" className={status === "submitting" ? "opacity-50" : ""}>
-            {status === "submitting" ? "Sending..." : "Send Message"}
+          <Button
+            type="submit"
+            variant="primary"
+            disabled={status === "submitting"}
+          >
+            {status === "submitting" ? "Sending…" : "Send message"}
           </Button>
         </div>
       </div>

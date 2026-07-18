@@ -1,18 +1,32 @@
-import { personal } from "@/data/personal";
+import Link from "next/link";
 import { SocialLinks } from "@/components/SocialLinks";
 
 export function Footer() {
   return (
-    <footer className="border-t-2 border-white">
-      <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="mt-auto border-t border-border">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 px-4 py-10 md:flex-row md:px-6">
         <div className="text-center md:text-left">
-          <p className="text-lg">{personal.name}</p>
-          <p className="text-gray-400 text-base">{personal.role}</p>
+          <p className="font-handwritten text-2xl text-foreground">
+            Achini Subasinghe
+          </p>
+          <p className="mt-1 text-sm font-medium tracking-wide text-muted">
+            Software Engineer
+          </p>
         </div>
+
         <SocialLinks />
-        <p className="text-gray-400 text-sm">
-          &copy; {new Date().getFullYear()} {personal.name}
-        </p>
+
+        <div className="flex flex-col items-center gap-2 text-center md:items-end md:text-right">
+          <p className="text-sm text-muted">
+            &copy; {new Date().getFullYear()} Achini Subasinghe
+          </p>
+          <Link
+            href="/contact"
+            className="text-sm text-muted underline-offset-4 transition-colors hover:text-accent hover:underline"
+          >
+            Get in touch
+          </Link>
+        </div>
       </div>
     </footer>
   );

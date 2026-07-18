@@ -6,10 +6,25 @@ import { aboutTabs } from "@/data/about";
 import { TabGroup, type Tab } from "@/components/TabGroup";
 import { Section } from "@/components/Section";
 
-const tabImages: Record<string, { src: string; width: number; height: number }> = {
-  education: { src: "/images/vice.jpeg", width: 1145, height: 764 },
-  tools: { src: "/images/lap.jpeg", width: 1280, height: 1145 },
-  technologies: { src: "/images/work.jpeg", width: 3024, height: 4032 },
+const tabImages: Record<string, { src: string; width: number; height: number; alt: string }> = {
+  education: {
+    src: "/images/vice.jpeg",
+    width: 1145,
+    height: 764,
+    alt: "Achini at university",
+  },
+  tools: {
+    src: "/images/lap.jpeg",
+    width: 1280,
+    height: 1145,
+    alt: "Laptop and workspace",
+  },
+  technologies: {
+    src: "/images/work.jpeg",
+    width: 3024,
+    height: 4032,
+    alt: "Working on software projects",
+  },
 };
 
 function groupByCategory(items: { name: string; category?: string }[]) {
@@ -26,7 +41,7 @@ function groupByCategory(items: { name: string; category?: string }[]) {
 
 function ToolPill({ name }: { name: string }) {
   return (
-    <span className="border-2 border-white rounded-full px-3 py-1 text-sm whitespace-nowrap">
+    <span className="inline-flex items-center rounded-md border border-border bg-surface-elevated/80 px-2.5 py-1 text-xs font-medium tracking-wide text-foreground/90">
       {name}
     </span>
   );
@@ -36,13 +51,13 @@ function renderToolsContent(content: { name: string; category?: string }[]) {
   const grouped = groupByCategory(content);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
       {Object.entries(grouped).map(([category, names]) => (
         <div
           key={category}
-          className="border border-white/40 rounded-xl p-4 flex flex-col gap-3"
+          className="flex flex-col gap-3 rounded-lg border border-border bg-background/40 p-4"
         >
-          <h3 className="text-base text-gray-400 border-b border-white/20 pb-2">
+          <h3 className="border-b border-border pb-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted">
             {category}
           </h3>
           <div className="flex flex-wrap gap-2">
@@ -64,9 +79,15 @@ function renderTabContent(
 
   if (typeof items[0] === "string") {
     return (
-      <ul className="list-disc list-inside space-y-3 text-lg">
+      <ul className="space-y-4 text-base leading-relaxed text-foreground/90">
         {(items as string[]).map((item, i) => (
-          <li key={i}>{item}</li>
+          <li key={i} className="flex gap-3">
+            <span
+              className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+              aria-hidden="true"
+            />
+            <span>{item}</span>
+          </li>
         ))}
       </ul>
     );
@@ -82,7 +103,9 @@ function renderTabContent(
     <div className="space-y-6">
       {Object.entries(grouped).map(([category, names]) => (
         <div key={category}>
-          <h3 className="text-xl text-gray-400 mb-3">{category}</h3>
+          <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+            {category}
+          </h3>
           <div className="flex flex-wrap gap-2">
             {names.map((name) => (
               <ToolPill key={name} name={name} />
@@ -106,18 +129,20 @@ export function AboutContent() {
   const image = tabImages[activeTab] ?? tabImages.education;
 
   return (
-    <div className="flex flex-col md:flex-row gap-10 items-start">
+    <div className="flex flex-col items-start gap-10 md:flex-row">
       <div className="w-full md:w-3/5">
         <TabGroup tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
-      <div className="w-full md:w-2/5 flex justify-center sticky top-8">
-        <Image
-          src={image.src}
-          alt="About section image"
-          width={image.width}
-          height={image.height}
-          className="rounded-2xl border-2 border-white w-full h-auto object-contain"
-        />
+      <div className="sticky top-24 flex w-full justify-center md:w-2/5">
+        <div className="overflow-hidden rounded-xl border border-border shadow-[var(--shadow-soft)]">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+            className="h-auto w-full object-cover transition-opacity duration-300"
+          />
+        </div>
       </div>
     </div>
   );

@@ -12,28 +12,44 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div>
-      <h1 className="text-3xl md:text-4xl mb-10">Contact</h1>
+      <header className="mb-10 space-y-3">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+          Say hello
+        </p>
+        <h1 className="text-3xl font-medium tracking-tight md:text-4xl">Contact</h1>
+      </header>
 
-      <div className="flex flex-col md:flex-row gap-10">
+      <div className="flex flex-col gap-10 md:flex-row">
         <div className="w-full md:w-3/5">
           <ContactForm />
         </div>
 
-        <div className="w-full md:w-2/5 flex flex-col gap-6">
+        <div className="flex w-full flex-col gap-6 md:w-2/5">
           <Section>
-            <h3 className="text-2xl mb-4">Contact Details</h3>
-            <ul className="space-y-4 text-lg">
-              <li>
-                <span className="text-gray-400">Email:</span>{" "}
-                <a href={`mailto:${personal.email}`} className="underline">
+            <h2 className="mb-5 text-lg font-medium tracking-tight">Details</h2>
+            <ul className="space-y-5 text-base">
+              <li className="flex flex-col gap-1">
+                <span className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+                  Email
+                </span>
+                <a
+                  href={`mailto:${personal.email}`}
+                  className="text-foreground underline-offset-4 hover:text-accent hover:underline"
+                >
                   {personal.email}
                 </a>
               </li>
-              <li>
-                <span className="text-gray-400">Phone:</span> {personal.phone}
+              <li className="flex flex-col gap-1">
+                <span className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+                  Phone
+                </span>
+                <span>{personal.phone}</span>
               </li>
-              <li>
-                <span className="text-gray-400">Location:</span> {personal.location}
+              <li className="flex flex-col gap-1">
+                <span className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+                  Location
+                </span>
+                <span>{personal.location}</span>
               </li>
             </ul>
           </Section>

@@ -10,21 +10,30 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="border-b-2 border-white">
-      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="text-2xl">
+    <nav className="sticky top-0 z-40 border-b border-border bg-background/75 backdrop-blur-md">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
+        <Link
+          href="/"
+          className="font-handwritten text-3xl font-semibold tracking-tight text-foreground transition-colors hover:text-accent"
+        >
           AS
         </Link>
 
         {/* Desktop links */}
-        <ul className="hidden md:flex gap-8 text-lg">
+        <ul className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={isActive ? "border-b-2 border-white" : "text-gray-400"}
+                  className={[
+                    "interactive-surface relative block rounded-full px-3 py-1.5 text-sm font-medium",
+                    isActive
+                      ? "bg-accent-soft text-accent"
+                      : "text-muted hover:bg-surface-elevated hover:text-foreground",
+                  ].join(" ")}
+                  aria-current={isActive ? "page" : undefined}
                 >
                   {link.label}
                 </Link>
@@ -35,11 +44,21 @@ export function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden border-2 border-white rounded-full p-2"
+          type="button"
+          className="interactive-surface rounded-full border border-border-strong p-2.5 text-foreground hover:border-accent/50 hover:bg-accent-soft lg:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle navigation menu"
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={menuOpen}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+          >
             {menuOpen ? (
               <path d="M18 6L6 18M6 6l12 12" />
             ) : (
@@ -51,14 +70,20 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <ul className="md:hidden px-4 pb-4 flex flex-col gap-3 text-lg">
+        <ul className="flex flex-col gap-1 border-t border-border px-4 py-4 lg:hidden">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={isActive ? "border-b-2 border-white" : "text-gray-400"}
+                  className={[
+                    "interactive-surface block rounded-lg px-3 py-2.5 text-base font-medium",
+                    isActive
+                      ? "bg-accent-soft text-accent"
+                      : "text-muted hover:bg-surface-elevated hover:text-foreground",
+                  ].join(" ")}
+                  aria-current={isActive ? "page" : undefined}
                   onClick={() => setMenuOpen(false)}
                 >
                   {link.label}

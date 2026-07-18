@@ -2,14 +2,20 @@ import type { Metadata } from "next";
 import { AboutContent } from "@/components/AboutContent";
 
 export const metadata: Metadata = {
-  title: "About Me | Achini Subasinghe",
-  description: "Learn more about Achini Subasinghe — education, tools, and technologies",
+  title: "About | Achini Subasinghe",
+  description:
+    "Education, tools, and technologies — Achini Subasinghe, software engineer at NSBM Green University.",
 };
 
 export default function AboutPage() {
   return (
     <div>
-      <h1 className="text-3xl md:text-4xl mb-10">About Me</h1>
+      <header className="mb-10 space-y-3">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+          Who I am
+        </p>
+        <h1 className="text-3xl font-medium tracking-tight md:text-4xl">About me</h1>
+      </header>
       <AboutContent />
     </div>
   );

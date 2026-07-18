@@ -28,25 +28,34 @@ export function TabGroup({ tabs, activeTab: controlledTab, onTabChange }: TabGro
 
   return (
     <div>
-      {/* Tab buttons */}
-      <div className="flex flex-wrap gap-3 mb-8">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => handleTabClick(tab.id)}
-            className={`border-2 border-white rounded-full px-6 py-2 text-lg ${
-              activeTab === tab.id ? "bg-white text-black" : ""
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+      <div
+        className="mb-8 flex flex-wrap gap-2"
+        role="tablist"
+        aria-label="About sections"
+      >
+        {tabs.map((tab) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              onClick={() => handleTabClick(tab.id)}
+              className={[
+                "interactive-surface rounded-full px-5 py-2 text-sm font-medium tracking-wide",
+                isActive
+                  ? "border border-accent/40 bg-accent text-background shadow-[0_0_20px_rgba(196,168,130,0.18)]"
+                  : "border border-border-strong bg-transparent text-muted hover:border-accent/40 hover:bg-accent-soft hover:text-accent",
+              ].join(" ")}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
       </div>
 
-      {/* Active tab content */}
-      <div>
-        {tabs.find((t) => t.id === activeTab)?.content}
-      </div>
+      <div role="tabpanel">{tabs.find((t) => t.id === activeTab)?.content}</div>
     </div>
   );
 }
